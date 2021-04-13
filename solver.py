@@ -21,7 +21,16 @@ class solve_cryptogram:
         i = 0
         for each in soup.findAll('div'):
             if i == 6:
-                return each.text
+
+                res = each.text.splitlines()[1]
+
+                if res == 'Sorry, no quotes found':
+                    #print(res)
+                    return 'You got us! Maybe, challenge us with a shorter cryptogram?'
+                
+                #print(res)
+                return res
+
             i += 1
 
 if __name__ == "__main__":
