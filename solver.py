@@ -10,7 +10,7 @@ r = requests.post(url, data = {
     'text': 'DL KBZ PVVM ZBDE LKBL EVXFROBRT DZ LKV CFOZL QFOZL QFOX FQ WFNVOMXVML VJRVGL BUU LKV FLKVOZ LKBL KBNV PVVM LODVE.'
 }).text
 
-# using bs4 to parse reponses
+# using bs4 (beautifulsoup) to parse reponses
 
 soup = BeautifulSoup(r, 'html.parser')
 i = 0
