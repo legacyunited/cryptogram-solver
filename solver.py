@@ -10,13 +10,15 @@ class solve_cryptogram:
         url = "http://rumkin.com/tools/cipher/cryptogram-solver.php"
 
         # posting data to website
-        r = requests.post(url, data = {
-            'dict': 'american-english-huge',
-            'text': cryptogram
-        }).text
+        try:
+            r = requests.post(url, data = {
+                'dict': 'american-english-huge',
+                'text': cryptogram
+            }).text
+        except:
+            return 'Sorry, try again.'
 
         # using bs4 (beautifulsoup) to parse reponses
-
         soup = BeautifulSoup(r, 'html.parser')
         i = 0
         for each in soup.findAll('div'):
