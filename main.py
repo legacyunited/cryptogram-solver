@@ -15,16 +15,18 @@ import os
 from kivy.core.window import Window
 Window.size = (360, 640)
 
-
 class WelcomeScreen(Screen):
     pass
+
+global number
+number = 0
 
 class HomeScreen(Screen):
     def capture(self):
         camera = self.ids['camera']
         #timestr = time.strftime("%Y%m%d_%H%M%S")
         #camera.export_to_png("IMG_{}.png".format(timestr))
-        camera.export_to_png("IMG.png")
+        camera.export_to_png(f"IMG_{number}.png")
         Clock.schedule_once(self.next_screen)
 
     def next_screen(self,dt):
@@ -32,15 +34,23 @@ class HomeScreen(Screen):
 
 class TransitionScreen(Screen):
     def on_enter(self):
-        Cache.remove('image')
-        self.ids.image.source = 'IMG.png'
+        global number
+        self.ids.image.source = f'IMG_{number}.png'
+        number += 1
 
 class LoadingScreen(Screen):
     def next_screen(self):
         self.manager.current = 'result'
+        
+    def on_enter(self):
+        Clock.schedule_interval(self.processing, 15)
+        
+    def processing(self,dt):
+        self.ids.spinner.active = False
 
 class ResultScreen(Screen):
     pass
+
 
 sm = ScreenManager()
 sm.add_widget(WelcomeScreen(name='welcome'))
