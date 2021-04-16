@@ -38,25 +38,30 @@ class TransitionScreen(Screen):
         self.ids.image.source = f'IMG_{number}.png'
         number += 1
 
-class LoadingScreen(Screen):
-    def next_screen(self):
-        self.manager.current = 'result'
-        
+class ResultScreen(Screen):       
     def on_enter(self):
-        Clock.schedule_interval(self.processing, 15)
-        
-    def processing(self,dt):
-        self.ids.spinner.active = False
+        self.ids.spinner.active = True
+        global number
+        print('uploading image')
+        self.ids.label.text = f"Uploading Image - IMG_{number}.png"
+        Clock.schedule_once(self.uploading, 4)
 
-class ResultScreen(Screen):
-    pass
+    def uploading(self,dt):
+        print('extracting text')
+        self.ids.label.text = "Image to Text Processingggggggggggggggggggggggggggggggggggggggggggggggggggggg"
+        Clock.schedule_once(self.processed, 4)
+        
+    def processed(self,dt):
+        print('downloading results')
+        self.ids.label.text = "Downloading Results"
+        self.ids.spinner.active = False
+        self.ids.start_over.size_hint = (0.5,0.1)
 
 
 sm = ScreenManager()
 sm.add_widget(WelcomeScreen(name='welcome'))
 sm.add_widget(HomeScreen(name='home'))
 sm.add_widget(TransitionScreen(name='transition'))
-sm.add_widget(TransitionScreen(name='loading'))
 sm.add_widget(TransitionScreen(name='result'))
 
 class Main(MDApp):
