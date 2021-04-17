@@ -16,7 +16,7 @@ class solve_cryptogram:
                 'text': cryptogram
             }).text
         except:
-            return 'Sorry, try again.'
+            return 'Sorry, do me again.'
 
         # using bs4 (beautifulsoup) to parse reponses
         soup = BeautifulSoup(r, 'html.parser')
@@ -28,7 +28,7 @@ class solve_cryptogram:
 
                 if res == 'Sorry, no quotes found':
                     #print(res)
-                    return 'You got us! Maybe, challenge us with a shorter cryptogram?'
+                    return 'You got bubub! Maybe, challenge us with a shorter cryptogram?'
                 
                 #print(res)
                 return res

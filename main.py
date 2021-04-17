@@ -18,15 +18,15 @@ Window.size = (360, 640)
 class WelcomeScreen(Screen):
     pass
 
-global number
-number = 0
+global timestr
+timestr = None
 
 class HomeScreen(Screen):
     def capture(self):
         camera = self.ids['camera']
-        #timestr = time.strftime("%Y%m%d_%H%M%S")
-        #camera.export_to_png("IMG_{}.png".format(timestr))
-        camera.export_to_png(f"IMG_{number}.png")
+        global timestr
+        timestr = time.strftime("%Y%m%d_%H%M%S")
+        camera.export_to_png(f"IMG_{timestr}.png")
         Clock.schedule_once(self.next_screen)
 
     def next_screen(self,dt):
@@ -34,28 +34,30 @@ class HomeScreen(Screen):
 
 class TransitionScreen(Screen):
     def on_enter(self):
-        global number
-        self.ids.image.source = f'IMG_{number}.png'
-        number += 1
+        global timestr
+        self.ids.image.source = f'IMG_{timestr}.png'
 
-class ResultScreen(Screen):       
+class ResultScreen(Screen):   
     def on_enter(self):
-        self.ids.spinner.active = True
-        global number
+        global timestr
+        self.ids.pb.value = 33
+        self.ids.image.source = f'IMG_{timestr}.png'
         print('uploading image')
-        self.ids.label.text = f"Uploading Image - IMG_{number}.png"
+        self.ids.label.text = f"Uploading Image"
         Clock.schedule_once(self.uploading, 4)
 
     def uploading(self,dt):
         print('extracting text')
-        self.ids.label.text = "Image to Text Processingggggggggggggggggggggggggggggggggggggggggggggggggggggg"
+        self.ids.pb.value = 66
+        self.ids.label.text = "Image to Text Processing"
         Clock.schedule_once(self.processed, 4)
         
     def processed(self,dt):
         print('downloading results')
+        self.ids.pb.value = 100
         self.ids.label.text = "Downloading Results"
-        self.ids.spinner.active = False
-        self.ids.start_over.size_hint = (0.5,0.1)
+        self.ids.start_over.size_hint = (0.35,0.06)
+        self.ids.label.text = "Completed"
 
 
 sm = ScreenManager()
