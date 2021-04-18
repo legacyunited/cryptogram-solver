@@ -6,6 +6,9 @@ sample = 'DL KBZ PVVM ZBDE LKBL EVXFROBRT DZ LKV CFOZL QFOZL QFOX FQ WFNVOMXVML 
 class solve_cryptogram:
     def solve(self, cryptogram):
 
+        if len(cryptogram) == 0:
+            return 'There is no text to decrypt.'
+
         # address for the cryptogram solver website
         url = "http://rumkin.com/tools/cipher/cryptogram-solver.php"
 

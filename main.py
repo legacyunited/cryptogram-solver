@@ -8,6 +8,8 @@ from kivy.uix.camera import Camera
 from kivy.clock import Clock
 from kivymd.uix.progressbar import ProgressBar
 from kivy.cache import Cache
+from solver import solve_cryptogram
+from ocr import detect_text
 import time
 import os
 
@@ -37,23 +39,38 @@ class TransitionScreen(Screen):
         global timestr
         self.ids.image.source = f'IMG_{timestr}.png'
 
-class ResultScreen(Screen):   
+class ResultScreen(Screen):  
+    def on_pre_enter(self):
+        #clearing text if any present
+        self.ids.label2.text = ""
+        self.ids.label3.text = ""
+        self.ids.pb.value = 0
+
     def on_enter(self):
         global timestr
-        self.ids.pb.value = 33
-        self.ids.image.source = f'IMG_{timestr}.png'
-        print('uploading image')
+        self.ids.pb.value = 25
+        #self.ids.image.source = f'IMG_{timestr}.png'
+        self.ids.image.source = 'test_image_2.jpg'
         self.ids.label.text = f"Uploading Image"
-        Clock.schedule_once(self.uploading, 4)
+        Clock.schedule_once(self.uploading,2)
 
     def uploading(self,dt):
-        print('extracting text')
-        self.ids.pb.value = 66
+        self.ids.pb.value = 50
         self.ids.label.text = "Image to Text Processing"
-        Clock.schedule_once(self.processed, 4)
-        
+        #self.image_text = detect_text(self.ids.image.source)
+        self.image_text = detect_text('test_image_2.jpg')
+        self.ids.label2.text = self.image_text
+        self.ids.label.text = "Waiting for User Input"
+
+    def decrypt(self):
+        self.ids.pb.value = 75
+        self.ids.label.text = "Solving the Mystery"
+        self.encrypted_text = solve_cryptogram()
+        self.result = self.encrypted_text.solve(self.ids.label2.text)
+        self.ids.label3.text = self.result
+        Clock.schedule_once(self.processed)
+
     def processed(self,dt):
-        print('downloading results')
         self.ids.pb.value = 100
         self.ids.label.text = "Downloading Results"
         self.ids.start_over.size_hint = (0.35,0.06)

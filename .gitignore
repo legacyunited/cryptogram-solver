@@ -129,6 +129,8 @@ dmypy.json
 .pyre/
 .vscode/settings.json
 
-# images
+# local files
 IMG*
 localtest.py
+test*
+vision_api.json

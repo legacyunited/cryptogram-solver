@@ -39,7 +39,9 @@ ScreenManager:
     name: 'transition'
     Image:
         id: image
+        angle: 90
         pos_hint: {'center_x':0.5,'center_y':0.6}
+
     MDProgressBar:
         id: progress
         pos_hint: {'center_x': 0.5, 'center_y': 0.25}
@@ -69,31 +71,40 @@ ScreenManager:
     name: "result"
     Image:
         id: image
-        pos_hint: {"center_x":0.5, "center_y":0.8}
-    MDProgressBar:
-        id: pb
-        height: "2dp"
-        pos_hint: {"center_x":0.5, "center_y":0.6}
-        size_hint_x: 0.6
+        pos_hint: {"center_x":0.5, "center_y":0.86}
+        size_hint: 0.88, 0.32
+        allow_stretch: True
     MDLabel:
         id: label
-        pos_hint: {"center_x":0.5, "center_y":0.56}
+        pos_hint: {"center_x":0.5, "center_y":0.65}
         halign: 'center'
         valign: 'top'
         theme_text_color: 'Hint'
-    MDLabel:
-        id: h1
-        pos_hint: {"center_x":0.5, "center_y":0.5}
-        halign: 'center'
-        text: "Encrypted Text"
-        bold: True
-        font_size: '20sp'
-        color: (0,99,251,1)
-    MDLabel:
+        font_size: '12sp'
+    MDProgressBar:
+        id: pb
+        height: "2dp"
+        pos_hint: {"center_x":0.5, "center_y":0.63}
+        size_hint_x: 0.9
+    MDTextField:
         id: label2
-        pos_hint: {"center_x":0.5, "center_y":0.44}
-        halign: 'center'
-        text: "This is how the text should look life if it is super long, although the limit is unknown to humanity."
+        hint_text: "Encrypted Text"
+        helper_text: "Verify the encrypted text."
+        pos_hint: {"center_x":0.5, "center_y":0.51}
+        size_hint: (0.85, None)
+        height: 7
+        multiline : True
+        text_color: (117,117,114,1)
+        helper_text: "Validate text before submitting"
+        helper_text_mode: "persistent"
+    MDRoundFlatButton:
+        id: solve
+        text: "Solve"
+        text_color: 0, 0, 0, 1
+        line_color: 0, 0, 0, 1
+        pos_hint: {"center_x":0.5, "center_y":0.36}
+        on_press:
+            root.decrypt()
     MDSeparator:
         id: separator
         height: "4dp"
@@ -101,7 +112,7 @@ ScreenManager:
         size_hint_x: 0.6
     MDLabel:
         id: h2
-        pos_hint: {"center_x":0.5, "center_y":0.28}
+        pos_hint: {"center_x":0.5, "center_y":0.29}
         halign: 'center'
         text: "Decrypted Result"
         bold: True
@@ -109,9 +120,9 @@ ScreenManager:
         color: (0,99,255,1)
     MDLabel:
         id: label3
-        pos_hint: {"center_x":0.5, "center_y":0.22}
+        pos_hint: {"center_x":0.5, "center_y":0.20}
         halign: 'center'
-        text: "This is how the resultant text should look life, although the limit is unknown to humanity."
+        size_hint_x: 0.85
     MDRaisedButton:
         id: start_over
         text: "Capture More"
