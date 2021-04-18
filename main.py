@@ -14,8 +14,8 @@ import time
 import os
 
 
-from kivy.core.window import Window
-Window.size = (360, 640)
+#from kivy.core.window import Window
+#Window.size = (360, 640)
 
 class WelcomeScreen(Screen):
     pass
@@ -49,16 +49,16 @@ class ResultScreen(Screen):
     def on_enter(self):
         global timestr
         self.ids.pb.value = 25
-        #self.ids.image.source = f'IMG_{timestr}.png'
-        self.ids.image.source = 'test_image_2.jpg'
+        self.ids.image.source = f'IMG_{timestr}.png'
+        #self.ids.image.source = 'test_image_2.jpg'
         self.ids.label.text = f"Uploading Image"
         Clock.schedule_once(self.uploading,2)
 
     def uploading(self,dt):
         self.ids.pb.value = 50
         self.ids.label.text = "Image to Text Processing"
-        #self.image_text = detect_text(self.ids.image.source)
-        self.image_text = detect_text('test_image_2.jpg')
+        self.image_text = detect_text(self.ids.image.source)
+        #self.image_text = detect_text('test_image_2.jpg')
         self.ids.label2.text = self.image_text
         self.ids.label.text = "Waiting for User Input"
 
