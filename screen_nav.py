@@ -71,7 +71,7 @@ ScreenManager:
     name: "result"
     Image:
         id: image
-        pos_hint: {"center_x":0.5, "center_y":0.86}
+        pos_hint: {"center_x":0.5, "center_y":0.82}
     MDLabel:
         id: label
         pos_hint: {"center_x":0.5, "center_y":0.65}
@@ -100,7 +100,8 @@ ScreenManager:
         text: "Solve"
         text_color: 0, 0, 0, 1
         line_color: 0, 0, 0, 1
-        pos_hint: {"center_x":0.5, "center_y":0.36}
+        pos_hint: {"center_x":0.5, "center_y":1.5}
+        visible: False
         on_press:
             root.decrypt()
     MDSeparator:

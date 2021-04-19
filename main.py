@@ -45,6 +45,7 @@ class ResultScreen(Screen):
         self.ids.label2.text = ""
         self.ids.label3.text = ""
         self.ids.pb.value = 0
+        self.ids.solve.pos_hint = {"center_x":0.5, "center_y":1.5}
 
     def on_enter(self):
         global timestr
@@ -60,6 +61,7 @@ class ResultScreen(Screen):
         self.image_text = detect_text(self.ids.image.source)
         #self.image_text = detect_text('test_image_2.jpg')
         self.ids.label2.text = self.image_text
+        self.ids.solve.pos_hint = {"center_x":0.5, "center_y":0.37}
         self.ids.label.text = "Waiting for User Input"
 
     def decrypt(self):
