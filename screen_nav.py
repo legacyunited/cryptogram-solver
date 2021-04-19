@@ -72,8 +72,6 @@ ScreenManager:
     Image:
         id: image
         pos_hint: {"center_x":0.5, "center_y":0.86}
-        size_hint: 0.88, 0.32
-        allow_stretch: True
     MDLabel:
         id: label
         pos_hint: {"center_x":0.5, "center_y":0.65}
@@ -135,3 +133,9 @@ ScreenManager:
             root.manager.current = 'home'
 
 """
+
+#commented image resolution
+'''
+size_hint: 0.88, 0.32
+        allow_stretch: True
+'''

@@ -14,8 +14,8 @@ import time
 import os
 
 
-#from kivy.core.window import Window
-#Window.size = (360, 640)
+from kivy.core.window import Window
+Window.size = (360, 640)
 
 class WelcomeScreen(Screen):
     pass
