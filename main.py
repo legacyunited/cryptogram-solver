@@ -51,7 +51,7 @@ class ResultScreen(Screen):
         global timestr
         self.ids.pb.value = 25
         self.ids.image.source = f'IMG_{timestr}.png'
-        #self.ids.image.source = 'test_image_2.jpg'
+        #self.ids.image.source = 'media/test_image_2.jpg'
         self.ids.label.text = f"Uploading Image"
         Clock.schedule_once(self.uploading,2)
 
@@ -59,7 +59,7 @@ class ResultScreen(Screen):
         self.ids.pb.value = 50
         self.ids.label.text = "Image to Text Processing"
         self.image_text = detect_text(self.ids.image.source)
-        #self.image_text = detect_text('test_image_2.jpg')
+        #self.image_text = detect_text('media/test_image_2.jpg')
         self.ids.label2.text = self.image_text
         self.ids.solve.pos_hint = {"center_x":0.5, "center_y":0.37}
         self.ids.label.text = "Waiting for User Input"

@@ -6,7 +6,7 @@ sample = 'DL KBZ PVVM ZBDE LKBL EVXFROBRT DZ LKV CFOZL QFOZL QFOX FQ WFNVOMXVML 
 class solve_cryptogram:
     def solve(self, cryptogram):
 
-        if len(cryptogram) == 0:
+        if len(cryptogram) == 0 or not len(''.join(cryptogram.replace(' ',''))):
             return 'There is no text to decrypt.'
 
         # address for the cryptogram solver website
@@ -33,7 +33,7 @@ class solve_cryptogram:
                     #print(res)
                     return 'You got bubub! Maybe, challenge us with a shorter cryptogram?'
                 
-                #print(res)
+                print(res)
                 return res
 
             i += 1
@@ -41,3 +41,5 @@ class solve_cryptogram:
 if __name__ == "__main__":
     test = solve_cryptogram()
     test.solve(sample)
+    test.solve('')
+    test.solve(' ')
